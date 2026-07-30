@@ -22,7 +22,8 @@
 import type { RandomState } from "../../random/index.ts";
 import { randomUpto } from "../../random/index.ts";
 import { type NumberData, rectSolver, SOLVE_UNIQUE } from "./solver.ts";
-import { encodeNumbers, type RectParams } from "./state.ts";
+import { encodeNumbers } from "./codec.ts";
+import type { RectParams } from "./params.ts";
 
 interface Rct {
   x: number;
