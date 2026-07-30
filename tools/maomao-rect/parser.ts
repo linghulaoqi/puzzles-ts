@@ -60,6 +60,10 @@ function regionFromCells(cells: number[], width: number): MaomaoRegion {
   return { top, left, bottom, right };
 }
 
+function regionArea(region: MaomaoRegion): number {
+  return (region.bottom - region.top + 1) * (region.right - region.left + 1);
+}
+
 export function parseRectangles(width: number, height: number, desc: string, aux: string): ParsedRectangles {
   checkDimensions(width, height);
   const expectedAuxLength = 1 + (width - 1) * height + (height - 1) * width;
@@ -100,7 +104,9 @@ export function parseRectangles(width: number, height: number, desc: string, aux
         queue.push(neighbour);
       }
     }
-    solutionRegions.push(regionFromCells(cells, width));
+    const region = regionFromCells(cells, width);
+    if (cells.length !== regionArea(region)) throw new Error("Solution component is not a rectangle");
+    solutionRegions.push(region);
   }
 
   solutionRegions.sort((a, b) => a.top - b.top || a.left - b.left || a.bottom - b.bottom || a.right - b.right);
