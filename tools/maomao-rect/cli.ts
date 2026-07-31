@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { generateBatch, generateOne } from "./generate.ts";
 import type { MaomaoExportLevel } from "./model.ts";
-import { DEFAULT_QUALITY } from "./quality.ts";
+import { resolveQualityConfig } from "./quality-config.ts";
 import { buildReport, renderReportMarkdown, type GenerationReport } from "./report.ts";
 import { assertMaomaoLevel } from "./schema.ts";
 import { validateRectangles } from "./validator.ts";
@@ -87,10 +87,6 @@ function requireGenerateOption(options: CliOptions): Required<Pick<CliOptions, "
   };
 }
 
-function qualityFor(width: number, height: number) {
-  return DEFAULT_QUALITY[`${width}x${height}`] ?? { maxSingletons: Math.ceil(width * height / 16), maxAspectRatio: 4, maxLongThinFraction: 0.5, maxEdgeClueFraction: 1 };
-}
-
 async function writeGenerated(options: CliOptions): Promise<GenerationReport> {
   const required = requireGenerateOption(options);
   const outputPath = path.resolve(required.output);
@@ -102,7 +98,7 @@ async function writeGenerated(options: CliOptions): Promise<GenerationReport> {
     startIndex: options.startIndex,
     maxAttempts: options.maxAttempts ?? required.count * 50,
     sourceCommit: options.sourceCommit,
-    qualityConfig: qualityFor(required.width, required.height),
+    qualityConfig: resolveQualityConfig(required.width, required.height).config,
   });
   const first = batch.accepted[0];
   const determinism = first

@@ -23,6 +23,7 @@
     "maomao:rect:generate": "node --experimental-strip-types tools/maomao-rect/cli.ts generate",
     "maomao:rect:validate": "node --experimental-strip-types tools/maomao-rect/cli.ts validate",
     "maomao:rect:report": "node --experimental-strip-types tools/maomao-rect/cli.ts report",
+    "maomao:rect:pool-audit": "node --experimental-strip-types tools/maomao-rect/pool-cli.ts",
     "maomao:rect:test": "vitest run --config tools/maomao-rect/vitest.config.ts",
     "maomao:rect:typecheck": "tsc -p tsconfig.maomao-rect.json --noEmit",
     "prepare": "husky"

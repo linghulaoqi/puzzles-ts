@@ -1,11 +1,6 @@
 import type { MaomaoClue, MaomaoMetrics, MaomaoRegion, QualityConfig } from "./model.ts";
 
-export const DEFAULT_QUALITY: Record<string, QualityConfig> = {
-  "4x4": { maxSingletons: 2, maxAspectRatio: 4, maxLongThinFraction: 0.5, maxEdgeClueFraction: 0.75 },
-  "5x5": { maxSingletons: 2, maxAspectRatio: 4, maxLongThinFraction: 0.5, maxEdgeClueFraction: 0.75 },
-  "6x6": { maxSingletons: 3, maxAspectRatio: 4, maxLongThinFraction: 0.5, maxEdgeClueFraction: 0.75 },
-  "7x7": { maxSingletons: 4, maxAspectRatio: 4, maxLongThinFraction: 0.5, maxEdgeClueFraction: 0.75 },
-};
+export { QUALITY_CONFIGS as DEFAULT_QUALITY } from "./quality-config.ts";
 
 function area(region: MaomaoRegion): number {
   return (region.bottom - region.top + 1) * (region.right - region.left + 1);
@@ -56,7 +51,12 @@ export function calculateMetrics(
 
 export function qualityRejectReasons(metrics: MaomaoMetrics, config: QualityConfig): string[] {
   const reasons: string[] = [];
-  if (metrics.singleCellRegionCount > config.maxSingletons) reasons.push("TOO_MANY_SINGLE_CELL_REGIONS");
+  if (
+    metrics.singleCellRegionCount > config.maxSingletons ||
+    (metrics.regionCount > 0 && metrics.singleCellRegionCount / metrics.regionCount > 0.5)
+  ) {
+    reasons.push("TOO_MANY_SINGLE_CELL_REGIONS");
+  }
   if (metrics.maxAspectRatio > config.maxAspectRatio) reasons.push("EXTREME_ASPECT_RATIO");
   if (metrics.regionCount && metrics.longThinRegionCount / metrics.regionCount > config.maxLongThinFraction) {
     reasons.push("TOO_MANY_LONG_THIN_REGIONS");
