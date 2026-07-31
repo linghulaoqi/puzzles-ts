@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "poolVersion": "maomao-rectangular-v0.2.1",
+  "sourceCommit": "27554b9ec39b66941d62a28b0a7c957b05d44aa6",
+  "qualityConfigVersion": "PROVISIONAL_RECTANGULAR_QUALITY_FILTERS_V0.1",
+  "generation": {
+    "expandfactor": 0,
+    "unique": true,
+    "seedPattern": "maomao-<width>x<height>-<six-digit-index>",
+    "format": [
+      "json",
+      "jsonl"
+    ]
+  },
+  "totalAccepted": 1800,
+  "structuralValidation": {
+    "records": 1800,
+    "passed": 1800,
+    "failed": 0,
+    "exactDuplicates": 0,
+    "widthHeightReversals": 0
+  },
+  "determinism": {
+    "samples": 60,
+    "matches": 60
+  },
+  "sizes": {
+    "4x6": {
+      "count": 100,
+      "attempts": 106,
+      "seedRange": {
+        "start": "maomao-4x6-000001",
+        "end": "maomao-4x6-000106"
+      },
+      "fingerprintSha256": "21651e25fef288e5e50c10a7519d87b6594271d867e8d9bf6350677dfacf1c6a",
+      "outputSha256": {
+        "candidates.json": "d9713589ac8f1726245030150918b741782cdcad29b3f5425e7f738175135af5",
+        "candidates.jsonl": "bb918e654bde2c8ff462fb0fd4a12d811ed41922add992733c51221bba1c28dc",
+        "rejected.jsonl": "caaffe26397f1e67d1b8710ca059cf680003e0cc358d443cd6fb3811fec3c84c",
+        "report.json": "0f291127b28e832066d355ba38ec7f1fbc0578a3a29c1b5af4f1ad91203aa008"
+      }
+    },
+    "5x7": {
+      "count": 200,
+      "attempts": 201,
+      "seedRange": {
+        "start": "maomao-5x7-000001",
+        "end": "maomao-5x7-000201"
+      },
+      "fingerprintSha256": "d3106cd27ab1dd1ec650d1a71a44100abde4053c99fbe21e446e1b2a4aad4556",
+      "outputSha256": {
+        "candidates.json": "b0e959878aaeaa0f25540752bd9a9e0b7a5123591d8d7891fc5bc5d44b665ee2",
+        "candidates.jsonl": "66651c7e67521b051d297928dff2c18d3edcc6d0f9f5fe1969f66de576ba9937",
+        "rejected.jsonl": "71d8c36e9688dc0403c624c3b950104b7238c73766cdad797ed085ff724c577c",
+        "report.json": "29f6462a7b7948bf7d27c84c154b843146fa75d2af638f3c4b05d86ad9f1ca05"
+      }
+    },
+    "5x8": {
+      "count": 250,
+      "attempts": 250,
+      "seedRange": {
+        "start": "maomao-5x8-000001",
+        "end": "maomao-5x8-000250"
+      },
+      "fingerprintSha256": "fc34b44bf5a769d821f13654dfa1a6341bb16d24dbd6ac90912ff12eb4b08aeb",
+      "outputSha256": {
+        "candidates.json": "361ea98e79746553540459ab199057adf4fc29274c3582735be426c474786e6e",
+        "candidates.jsonl": "dfbaf77680b78c253614df5786d30db43050d0d182dbcec8546c644c9cd10dbe",
+        "rejected.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report.json": "ed1d26e2d9d5978b039fcf8d64fa1b17da19e198e5cae032ef4037460421c451"
+      }
+    },
+    "6x9": {
+      "count": 350,
+      "attempts": 350,
+      "seedRange": {
+        "start": "maomao-6x9-000001",
+        "end": "maomao-6x9-000350"
+      },
+      "fingerprintSha256": "d138690e259fbd349f4e99d05e81d36456b26ec501b677affdbf0387e837d971",
+      "outputSha256": {
+        "candidates.json": "b734343b32e7492997e50c3739c31b7e8ee4e1253f31334f2b4ff1fe637cbb1c",
+        "candidates.jsonl": "6a8da66ffda55e4c062ec9f813e6a454b3ffc46d5581686f7edc4416c80d21e0",
+        "rejected.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report.json": "aa04511c76ade897f0eb5604e9af343280a04828b18e1e545224dd2a65303bc6"
+      }
+    },
+    "7x10": {
+      "count": 400,
+      "attempts": 400,
+      "seedRange": {
+        "start": "maomao-7x10-000001",
+        "end": "maomao-7x10-000400"
+      },
+      "fingerprintSha256": "3762c4cc32f28ce401fc405eea6fb343544b60663f27e53d276fb7fabc43d0be",
+      "outputSha256": {
+        "candidates.json": "767a870ab98ab1e6e15ebfd1a8bb65e6f06b9942c738f8ea0180a9a7317b9d51",
+        "candidates.jsonl": "042b037fcbcb6d7d68199114ef2174d843714f144fa94810d741839fc55b2779",
+        "rejected.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report.json": "b307000ac650acedb0bed56bf17effb4b69672d820c0b62b74595c7039a8158f"
+      }
+    },
+    "8x12": {
+      "count": 500,
+      "attempts": 500,
+      "seedRange": {
+        "start": "maomao-8x12-000001",
+        "end": "maomao-8x12-000500"
+      },
+      "fingerprintSha256": "27f56e0f5d9b84162659a1f708a3caca2c3f70f6630d32010eff8856e6d7ff1e",
+      "outputSha256": {
+        "candidates.json": "e2802fa681824c5c8f7dc8d736aa0f95de06c823fc117fcd5ebf8fc405033b04",
+        "candidates.jsonl": "381ba6483b70ebdce52c758e38a42cc52420ee15da41f3b256572bf278ade611",
+        "rejected.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report.json": "2ac17b1ffa995d77d02657d288c891396052b43675c15d22a57e5c53cde75370"
+      }
+    }
+  }
+}
