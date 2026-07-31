@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "sourcePoolVersion": "maomao-rectangular-v0.2.1",
+  "generatorCommit": "27554b9ec39b66941d62a28b0a7c957b05d44aa6",
+  "candidateCount": 1800,
+  "sizes": {
+    "4x6": 100,
+    "5x7": 200,
+    "5x8": 250,
+    "6x9": 350,
+    "7x10": 400,
+    "8x12": 500
+  },
+  "poolManifestSha256": "87240db3db64fcd571916c6a373433491d1a589bad625a06da471fe02029093f",
+  "reproductionSamples": 60,
+  "reproductionMatches": 60
+}
