@@ -8,3 +8,5 @@ export * from "./quality.ts";
 export * from "./quality-config.ts";
 export * from "./report.ts";
 export * from "./validator.ts";
+export * from "./difficulty/index.ts";
+export * from "./formal/index.ts";

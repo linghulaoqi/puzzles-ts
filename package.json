@@ -24,6 +24,10 @@
     "maomao:rect:validate": "node --experimental-strip-types tools/maomao-rect/cli.ts validate",
     "maomao:rect:report": "node --experimental-strip-types tools/maomao-rect/cli.ts report",
     "maomao:rect:pool-audit": "node --experimental-strip-types tools/maomao-rect/pool-cli.ts",
+    "maomao:rect:analyze-difficulty": "node --experimental-strip-types tools/maomao-rect/formal/formal-cli.ts analyze-difficulty",
+    "maomao:rect:select-formal": "node --experimental-strip-types tools/maomao-rect/formal/formal-cli.ts select-formal",
+    "maomao:rect:export-formal": "node --experimental-strip-types tools/maomao-rect/formal/formal-cli.ts export-formal",
+    "maomao:rect:verify-formal": "node --experimental-strip-types tools/maomao-rect/formal/formal-cli.ts verify-formal",
     "maomao:rect:test": "vitest run --config tools/maomao-rect/vitest.config.ts",
     "maomao:rect:typecheck": "tsc -p tsconfig.maomao-rect.json --noEmit",
     "prepare": "husky"
