@@ -1,4 +1,5 @@
-export const FORMAL_SELECTION_VERSION = "MAOMAO_FORMAL_SELECTION_V0.3";
+export const FORMAL_SELECTION_VERSION = "MAOMAO_FORMAL_SELECTION_V0.4";
+export const PROGRESSION_MODEL_VERSION = "PROVISIONAL_PROGRESSION_MODEL_V0.2";
 export const SIMILARITY_FILTER_VERSION = "PROVISIONAL_SIMILARITY_FILTER_V0.1";
 export const DEFAULT_SIMILARITY_THRESHOLD = 0.92;
 export const QUALITY_RELAXATION_STEPS = [0.7, 0.8, 0.9, 1] as const;
@@ -41,4 +42,20 @@ export function tierForScore(score: number): "easy" | "medium" | "hard" {
   if (score <= 30) return "easy";
   if (score <= 80) return "medium";
   return "hard";
+}
+
+export function progressionEffort(entry: {
+  readonly logicalActions: number;
+  readonly candidateEliminations: number;
+  readonly branchCount: number;
+  readonly backtrackCount: number;
+  readonly maximumSearchDepth: number;
+}): number {
+  return Number((
+    entry.logicalActions
+    + entry.candidateEliminations * 0.25
+    + entry.branchCount * 4
+    + entry.backtrackCount * 1.5
+    + entry.maximumSearchDepth * 0.25
+  ).toFixed(2));
 }

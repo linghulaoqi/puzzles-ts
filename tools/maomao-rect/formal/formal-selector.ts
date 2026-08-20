@@ -9,6 +9,7 @@ import {
   CHAPTER_SIZE_SEQUENCE,
   FORMAL_SIZE_QUOTAS,
   QUALITY_RELAXATION_STEPS,
+  progressionEffort,
   tierForScore,
 } from "./formal-config.ts";
 import { calculateQualityScore } from "./quality-score.ts";
@@ -33,6 +34,12 @@ function compareDifficulty(first: CandidateAnalysis, second: CandidateAnalysis):
     || second.qualityScore - first.qualityScore
     || first.candidate.level.levelId.localeCompare(second.candidate.level.levelId)
     || first.candidate.seed.localeCompare(second.candidate.seed);
+}
+
+function compareProgression(first: SelectedCandidate, second: SelectedCandidate): number {
+  return first.quantile - second.quantile
+    || progressionEffort(first.difficulty) - progressionEffort(second.difficulty)
+    || compareDifficulty(first, second);
 }
 
 function standardDeviation(values: readonly number[]): number {
@@ -246,7 +253,7 @@ export function selectFormalLevels(
   const queues = new Map<string, SelectedCandidate[]>();
   for (const quota of FORMAL_SIZE_QUOTAS) {
     const key = boardSizeKey(quota.width, quota.height);
-    queues.set(key, selectedFormal.filter((candidate) => candidate.sizeKey === key).sort(compareDifficulty));
+    queues.set(key, selectedFormal.filter((candidate) => candidate.sizeKey === key).sort(compareProgression));
   }
   const formalWithoutReserve = CHAPTER_SIZE_SEQUENCE.map((sizeKey, index) => {
     const selected = queues.get(sizeKey)?.shift();

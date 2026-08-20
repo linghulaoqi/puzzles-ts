@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { FORMAL_SIZE_QUOTAS } from "./formal-config.ts";
+import { FORMAL_SIZE_QUOTAS, progressionEffort } from "./formal-config.ts";
 import { buildMockAnalyses } from "./test-fixtures.ts";
 import { selectFormalLevels } from "./formal-selector.ts";
 
@@ -33,5 +33,30 @@ describe("deterministic formal selector", () => {
     const second = selectFormalLevels(buildMockAnalyses(), 1.01);
     expect(second.formal.map((entry) => entry.candidate.level.levelId)).toEqual(first.formal.map((entry) => entry.candidate.level.levelId));
     expect(second.reserve.map((entry) => entry.candidate.level.levelId)).toEqual(first.reserve.map((entry) => entry.candidate.level.levelId));
+  });
+
+  it("orders each size and quantile by progression effort", () => {
+    const analyses = buildMockAnalyses().map((entry) => ({
+      ...entry,
+      difficulty: {
+        ...entry.difficulty,
+        logicalActions: 1_000 - entry.difficulty.difficultyRawScore,
+      },
+    }));
+    const result = selectFormalLevels(analyses, 1.01);
+    for (const quota of FORMAL_SIZE_QUOTAS) {
+      const sizeKey = `${quota.width}x${quota.height}`;
+      const levels = result.formal.filter((entry) => entry.sizeKey === sizeKey);
+      for (let index = 1; index < levels.length; index += 1) {
+        const previous = levels[index - 1]!;
+        const current = levels[index]!;
+        expect(current.quantile).toBeGreaterThanOrEqual(previous.quantile);
+        if (current.quantile === previous.quantile) {
+          expect(progressionEffort(current.difficulty)).toBeGreaterThanOrEqual(
+            progressionEffort(previous.difficulty),
+          );
+        }
+      }
+    }
   });
 });

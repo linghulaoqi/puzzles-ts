@@ -2,7 +2,8 @@ import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { formalRuntimeLevel, writeFormalOutput } from "./formal-exporter.ts";
+import { PROGRESSION_MODEL_VERSION } from "./formal-config.ts";
+import { formalMapping, formalRuntimeLevel, writeFormalOutput } from "./formal-exporter.ts";
 import { buildMockSelection } from "./test-fixtures.ts";
 
 describe("formal exporter", () => {
@@ -12,6 +13,17 @@ describe("formal exporter", () => {
     expect(runtime).not.toHaveProperty("seed");
     expect(runtime).not.toHaveProperty("fingerprint");
     expect(runtime).not.toHaveProperty("difficultyRawScore");
+    expect(runtime.contentVersion).toBe(2);
+  });
+
+  it("records the progression model and effort in the audit mapping", () => {
+    const mapping = formalMapping(buildMockSelection()) as {
+      readonly progressionModel: string;
+      readonly levels: readonly { readonly progressionEffort: number }[];
+    };
+    expect(mapping.progressionModel).toBe(PROGRESSION_MODEL_VERSION);
+    expect(mapping.levels).toHaveLength(100);
+    expect(mapping.levels.every((level) => Number.isFinite(level.progressionEffort))).toBe(true);
   });
 
   it("writes 100 formal and 100 reserve files plus mappings", async () => {

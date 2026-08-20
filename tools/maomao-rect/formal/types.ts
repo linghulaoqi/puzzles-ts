@@ -60,7 +60,7 @@ export interface FormalRuntimeLevel {
   readonly clues: MaomaoExportLevel["clues"];
   readonly solutionRegions: MaomaoExportLevel["solutionRegions"];
   readonly tutorial: { readonly enabled: false; readonly stepId: "none" };
-  readonly contentVersion: 1;
+  readonly contentVersion: 2;
 }
 
 export interface ReserveRuntimeLevel {

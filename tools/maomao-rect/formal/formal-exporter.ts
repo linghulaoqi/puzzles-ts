@@ -1,7 +1,12 @@
 import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DIFFICULTY_MODEL_VERSION } from "../difficulty/difficulty-config.ts";
-import { FORMAL_SELECTION_VERSION, SIMILARITY_FILTER_VERSION } from "./formal-config.ts";
+import {
+  FORMAL_SELECTION_VERSION,
+  PROGRESSION_MODEL_VERSION,
+  progressionEffort,
+  SIMILARITY_FILTER_VERSION,
+} from "./formal-config.ts";
 import type {
   FormalRuntimeLevel,
   FormalSelectionResult,
@@ -27,7 +32,7 @@ export function formalRuntimeLevel(entry: OrderedFormalLevel): FormalRuntimeLeve
     clues: source.clues.map((clue) => ({ ...clue })),
     solutionRegions: source.solutionRegions.map((region) => ({ ...region })),
     tutorial: { enabled: false, stepId: "none" },
-    contentVersion: 1,
+    contentVersion: 2,
   };
 }
 
@@ -83,6 +88,7 @@ export function formalMapping(result: FormalSelectionResult): Record<string, unk
     difficultyModel: DIFFICULTY_MODEL_VERSION,
     similarityFilter: SIMILARITY_FILTER_VERSION,
     similarityThreshold: result.similarityThreshold,
+    progressionModel: PROGRESSION_MODEL_VERSION,
     majorDifficultyReversals: result.majorDifficultyReversals,
     fullPoolDifficultyStandardDeviation: result.fullPoolDifficultyStandardDeviation,
     levels: result.formal.map((entry) => ({
@@ -92,6 +98,7 @@ export function formalMapping(result: FormalSelectionResult): Record<string, unk
       difficultyTier: entry.difficultyTier,
       difficultyScore: entry.difficultyScore,
       preferredReserveId: entry.preferredReserveId,
+      progressionEffort: progressionEffort(entry.difficulty),
       ...auditFields(entry),
     })),
   };
@@ -117,7 +124,7 @@ function renderReport(result: FormalSelectionResult): string {
   const logicalStalled = result.analyzed.filter((candidate) => candidate.difficulty.logicalStall).length;
   const sizes = ["4x6", "5x7", "5x8", "6x9", "7x10", "8x12"];
   const rows = sizes.map((size) => `| ${size} | ${result.formal.filter((entry) => entry.sizeKey === size).length} | ${result.reserve.filter((entry) => entry.sizeKey === size).length} | ${result.qualityRelaxations[size] ?? 0} |`).join("\n");
-  return `# maomao Formal Selection Report V0.3
+  return `# maomao Formal Selection Report V0.4
 
 - Candidate pool: \`${result.sourcePoolVersion}\`
 - Generator commit: \`${result.generatorCommit}\`
@@ -131,6 +138,7 @@ function renderReport(result: FormalSelectionResult): string {
 - Quantile fallbacks: ${result.quantileFallbacks}
 - Major difficulty reversals: ${result.majorDifficultyReversals}
 - Difficulty classification: PROVISIONAL V0.1
+- Progression ordering: ${PROGRESSION_MODEL_VERSION}
 - Human-calibrated difficulty: NO
 
 | Size | Formal | Reserve | Maximum quality fraction used |
