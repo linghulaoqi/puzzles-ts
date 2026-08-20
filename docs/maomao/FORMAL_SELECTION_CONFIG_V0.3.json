@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "selectionVersion": "MAOMAO_FORMAL_SELECTION_V0.3",
+  "difficultyAnalyzerVersion": "MAOMAO_DIFFICULTY_ANALYZER_V0.1",
+  "difficultyModelVersion": "PROVISIONAL_DIFFICULTY_MODEL_V0.1",
+  "similarityFilterVersion": "PROVISIONAL_SIMILARITY_FILTER_V0.1",
+  "qualityFractions": [0.7, 0.8, 0.9, 1.0],
+  "similarity": {
+    "sameSizeOnly": true,
+    "threshold": 0.92,
+    "boundaryWeight": 0.55,
+    "regionShapeWeight": 0.25,
+    "clueLayoutWeight": 0.2
+  },
+  "difficultyScoreWeights": {
+    "area": 800,
+    "averageCandidate": 30,
+    "initialForcedRatio": -20,
+    "logicalRounds": 20,
+    "eliminationRatio": 20,
+    "logicalStall": 20,
+    "unresolvedClueRatio": 15,
+    "searchNode": 35,
+    "searchDepth": 20,
+    "backtrack": 30
+  },
+  "formalSizeQuotas": [
+    { "size": "4x6", "formal": 15, "reserve": 15, "quantiles": [5, 4, 3, 2, 1] },
+    { "size": "5x7", "formal": 20, "reserve": 20, "quantiles": [4, 5, 5, 4, 2] },
+    { "size": "5x8", "formal": 20, "reserve": 20, "quantiles": [3, 4, 5, 5, 3] },
+    { "size": "6x9", "formal": 20, "reserve": 20, "quantiles": [2, 4, 5, 5, 4] },
+    { "size": "7x10", "formal": 15, "reserve": 15, "quantiles": [1, 2, 4, 4, 4] },
+    { "size": "8x12", "formal": 10, "reserve": 10, "quantiles": [0, 1, 2, 3, 4] }
+  ],
+  "chapters": 10,
+  "levelsPerChapter": 10,
+  "orderSemantics": "chapter-local-1-through-10",
+  "difficultyTiers": {
+    "easy": [1, 30],
+    "medium": [31, 80],
+    "hard": [81, 100]
+  }
+}
